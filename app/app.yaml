@@ -1,0 +1,34 @@
+application: golden-php
+version: dev
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /(.*\.(appcache|manifest))
+  mime_type: text/cache-manifest
+  static_files: static/\1
+  upload: static/(.*\.(appcache|manifest))
+  expiration: "0m"
+
+- url: /
+  static_files: index.html
+  upload: /index.html
+  expiration: "15m"
+
+- url: /(.*\.html)
+  static_files: \1
+  upload: (.*\.html)
+  expiration: "1h"
+  
+- url: /scripts
+  static_dir: scripts
+
+- url: /bower_components
+  static_dir: bower_components
+
+- url: /styles
+  static_dir: styles
+
+- url: /images
+  static_dir: images
